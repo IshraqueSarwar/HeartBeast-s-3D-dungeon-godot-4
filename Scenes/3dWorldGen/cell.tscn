@@ -1,0 +1,73 @@
+[gd_scene load_steps=13 format=3 uid="uid://33ura0i8kluk"]
+
+[ext_resource type="Script" path="res://scripts/3dworldGen/cell.gd" id="1_0juy0"]
+[ext_resource type="Texture2D" uid="uid://bjx0af71iakjx" path="res://artAssets/Floor.png" id="1_u12te"]
+[ext_resource type="Texture2D" uid="uid://dlvwko3056tiq" path="res://artAssets/FloorNormals.png" id="2_chlnx"]
+[ext_resource type="ArrayMesh" uid="uid://dayvjoonmcxmc" path="res://artAssets/Floor.obj" id="3_lqeuk"]
+[ext_resource type="Texture2D" uid="uid://bj62iwibs06al" path="res://artAssets/Wall.png" id="4_u7fku"]
+[ext_resource type="Texture2D" uid="uid://rraeqxlmoap6" path="res://artAssets/WallNormals.png" id="5_em4ds"]
+[ext_resource type="ArrayMesh" uid="uid://bltsgd0rr7t6m" path="res://artAssets/Wall.obj" id="6_djvnq"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_wmlfn"]
+albedo_texture = ExtResource("1_u12te")
+normal_enabled = true
+normal_texture = ExtResource("2_chlnx")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_e1i4h"]
+albedo_texture = ExtResource("1_u12te")
+normal_enabled = true
+normal_texture = ExtResource("2_chlnx")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3qw7k"]
+albedo_texture = ExtResource("4_u7fku")
+normal_enabled = true
+normal_texture = ExtResource("5_em4ds")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_n584k"]
+albedo_texture = ExtResource("4_u7fku")
+normal_enabled = true
+normal_texture = ExtResource("5_em4ds")
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_oft0u"]
+
+[node name="Cell" type="Area3D"]
+script = ExtResource("1_0juy0")
+
+[node name="TopFace" type="MeshInstance3D" parent="."]
+transform = Transform3D(-1, -8.74228e-08, 0, 8.74228e-08, -1, 0, 0, 0, 1, 0, 2, 0)
+material_override = SubResource("StandardMaterial3D_wmlfn")
+material_overlay = SubResource("StandardMaterial3D_e1i4h")
+mesh = ExtResource("3_lqeuk")
+
+[node name="BottomFace" type="MeshInstance3D" parent="."]
+material_override = SubResource("StandardMaterial3D_wmlfn")
+material_overlay = SubResource("StandardMaterial3D_e1i4h")
+mesh = ExtResource("3_lqeuk")
+
+[node name="NorthFace" type="MeshInstance3D" parent="."]
+transform = Transform3D(-1, -8.74228e-08, -3.82137e-15, 0, -4.37114e-08, 1, -8.74228e-08, 1, 4.37114e-08, 0, 1, -1)
+material_override = SubResource("StandardMaterial3D_3qw7k")
+material_overlay = SubResource("StandardMaterial3D_n584k")
+mesh = ExtResource("6_djvnq")
+
+[node name="WestFace" type="MeshInstance3D" parent="."]
+transform = Transform3D(-4.37114e-08, 1, 4.37114e-08, 0, -4.37114e-08, 1, 1, 4.37114e-08, 1.91069e-15, -1, 1, 0)
+material_override = SubResource("StandardMaterial3D_3qw7k")
+material_overlay = SubResource("StandardMaterial3D_n584k")
+mesh = ExtResource("6_djvnq")
+
+[node name="EastFace" type="MeshInstance3D" parent="."]
+transform = Transform3D(-4.37114e-08, -1, -4.37114e-08, 0, -4.37114e-08, 1, -1, 4.37114e-08, 1.91069e-15, 1, 1, 0)
+material_override = SubResource("StandardMaterial3D_3qw7k")
+material_overlay = SubResource("StandardMaterial3D_n584k")
+mesh = ExtResource("6_djvnq")
+
+[node name="SouthFace" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 1, 1)
+material_override = SubResource("StandardMaterial3D_3qw7k")
+material_overlay = SubResource("StandardMaterial3D_n584k")
+mesh = ExtResource("6_djvnq")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("BoxShape3D_oft0u")
